@@ -1,0 +1,21 @@
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <h1>Sign-in</h1>
+    </div>
+</md-toolbar>
+<md-content layout-padding>
+    <form name="mainForm" action="#" method="post" novalidate>
+        <md-input-container class="md-block">
+            <label for="email">Email</label>
+            <input name="email" ng-model="formData.email" type="email" id="email" required>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label for="password">Password</label>
+            <input name="email" ng-model="formData.password" type="password" id="password" required>
+        </md-input-container>
+        <div layout-gt-xs layout-align="space-between center">
+            <md-button class="md-raised md-primary" ng-disabled="mainForm.$invalid" ng-click="login($event)">Sign-in</md-button>
+            <p><a ui-sref="register">Sign-up</a></p>
+        </div>
+    </form>
+</md-content>

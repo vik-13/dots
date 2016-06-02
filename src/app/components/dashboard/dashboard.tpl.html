@@ -1,0 +1,22 @@
+<div class="page" flex layout="row">
+    <md-sidenav md-is-locked-open="true" class="md-sidenav-left md-whiteframe-z2" flex>
+        <md-toolbar class="md-warn">
+            <div class="md-toolbar-tools">
+                <h2>Tic Tac Toe</h2>
+            </div>
+        </md-toolbar>
+        <users></users>
+    </md-sidenav>
+    <div flex layout="column">
+        <md-toolbar>
+            <div class="md-toolbar-tools"  layout layout-align="space-between center">
+                <p>Hello {{userInfo.name}}</p>
+                <a class="inverse-link" href="#" ng-click="signOut()">Sign-out</a>
+            </div>
+        </md-toolbar>
+        <md-content flex layout="column">
+            <game-box></game-box>
+            <chats></chats>
+        </md-content>
+    </div>
+</div>
