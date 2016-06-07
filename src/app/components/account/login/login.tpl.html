@@ -13,6 +13,9 @@
             <label for="password">Password</label>
             <input name="email" ng-model="formData.password" type="password" id="password" required>
         </md-input-container>
+        <div class="messages-container" ng-show="errorMessage">
+            <div class="auth-message error">Incorrect login or password...</div>
+        </div>
         <div layout-gt-xs layout-align="space-between center">
             <md-button class="md-raised md-primary" ng-disabled="mainForm.$invalid" ng-click="login($event)">Sign-in</md-button>
             <p><a ui-sref="register">Sign-up</a></p>

@@ -5,18 +5,21 @@
 
     /*ngInject*/
     function LoginController($scope, $state, loginService) {
+        $scope.errorMessage = false;
         $scope.formData = {};
         $scope.login = login;
 
         function login(event) {
             event.preventDefault();
 
+            $scope.errorMessage = false;
+
             loginService
                 .login($scope.formData)
                 .then(function() {
                     $state.go('dashboard');
-                }, function(response) {
-                    //TODO: Show some error message for login page
+                }, function() {
+                    $scope.errorMessage = true;
                 });
         }
     }
