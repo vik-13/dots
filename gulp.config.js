@@ -9,18 +9,7 @@ module.exports = function() {
             ],
             images: 'src/assets/images/**/*',
             fonts: 'src/assets/fonts/**/*',
-            templates: 'src/app/**/*.tpl.html',
-            icons: [
-                'src/favicon.ico',
-                'src/apple-touch-icon-precomposed.png'
-            ],
-            vendors: [
-                'node_modules/es6-shim/es6-shim.min.js',
-                'node_modules/core-js/client/shim.min.js',
-                'node_modules/zone.js/dist/zone.js',
-                'node_modules/reflect-metadata/Reflect.js',
-                'node_modules/systemjs/dist/system.src.js'
-            ]
+            templates: 'src/app/**/*.tpl.html'
         },
         dev: {
             index: 'dev',
@@ -29,7 +18,6 @@ module.exports = function() {
             images: 'dev/images',
             fonts: 'dev/fonts',
             templates: 'dev/app',
-            icons: 'dev',
             vendors: 'dev/vendor'
         }
     };

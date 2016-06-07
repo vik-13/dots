@@ -1,20 +1,15 @@
 var config = require('./gulp.config')();
 
 var gulp = require('gulp'),
-    filter = require('gulp-filter'),
-    preprocess = require('gulp-preprocess'),
-    file = require('gulp-file'),
-    uglify = require('gulp-uglify'),
-    inject = require('gulp-inject'),
-    sass = require('gulp-sass'),
-    concat = require('gulp-concat'),
-    order = require('gulp-order'),
-    ngHtml2js = require('gulp-ng-html2js'),
     angularFileSort = require('gulp-angular-filesort'),
+    concat = require('gulp-concat'),
+    inject = require('gulp-inject'),
+    ngAnnotate = require('gulp-ng-annotate'),
+    ngHtml2js = require('gulp-ng-html2js'),
+    sass = require('gulp-sass'),
     del = require('del'),
-    es = require('event-stream'),
-    mainBowerFiles = require('main-bower-files'),
-    ngAnnotate = require('gulp-ng-annotate');
+    eventStream = require('event-stream'),
+    mainBowerFiles = require('main-bower-files');
 
 gulp.task('clean-dev', cleanDev);
 gulp.task('compile', compile);
@@ -27,17 +22,17 @@ function cleanDev() {
 }
 
 function compile() {
-    return es.merge(
+    return eventStream.merge(
         buildIndex(),
         buildImages(),
-        buildFonts(),
-        buildTemplates()
+        buildFonts()
     );
 }
 
 function buildIndex() {
     return gulp.src(config.sources.index)
         .pipe(inject(buildScripts(), { relative: true }))
+        .pipe(inject(buildTemplates(), { relative: true, name: 'templates' }))
         .pipe(inject(buildVendorScripts(), { relative: true, name: 'vendor' }))
         .pipe(inject(buildStyles(), { relative: true }))
         .pipe(gulp.dest(config.dev.index));
@@ -53,9 +48,23 @@ function buildFonts() {
         .pipe(gulp.dest(config.dev.fonts));
 }
 
+function buildScripts() {
+    return gulp.src(config.sources.scripts)
+        .pipe(angularFileSort())
+        .pipe(ngAnnotate())
+        .pipe(gulp.dest(config.dev.scripts));
+}
+
 function buildTemplates() {
     return gulp.src(config.sources.templates)
+        .pipe(ngHtml2js({moduleName: 'templates'}))
+        .pipe(concat('templates.js'))
         .pipe(gulp.dest(config.dev.templates));
+}
+
+function buildVendorScripts() {
+    return gulp.src(mainBowerFiles())
+        .pipe(gulp.dest(config.dev.vendors));
 }
 
 function buildStyles() {
@@ -63,25 +72,4 @@ function buildStyles() {
         .pipe(sass())
         .pipe(concat('app.css'))
         .pipe(gulp.dest(config.dev.stylesheets));
-}
-
-function buildVendorScripts() {
-    return gulp.src(config.sources.vendors)
-        .pipe(gulp.dest(config.dev.vendors));
-}
-
-function buildScripts() {
-    var appScripts = pipes.orderingScripts()
-        .pipe(preprocess())
-        .pipe(ngAnnotate())
-        .pipe(gulp.dest(paths.dirBuildAssetsJavascript));
-
-    var buildScriptedTemplates = pipes.scriptedTemplates()
-            .pipe(concat('app-templates.js'))
-            .pipe(gulp.dest(paths.dirBuildAssetsJavascript));
-
-    return es.merge(
-        appScripts,
-        buildScriptedTemplates
-    );
 }
