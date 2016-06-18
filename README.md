@@ -2,7 +2,7 @@
 This is a dots online game. The game is created by using angular.js 1.x and firebase.
 
 This is written as an example my best practice of using angular 1.x for SPA.
-The application includes auth (sign-in, sign-up pages), list of all registered users, instant messenger and obviously tic-tac-toe game.
+The application includes auth (sign-in, sign-up pages), list of all registered users, instant messenger and obviously dots game.
 
 
 # How to play.
