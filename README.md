@@ -1,8 +1,8 @@
-# tic-tac-toe
-This is a popular tic-tac-toe online game. The game is created by using angular.js 1.x and firebase.
+# Dots
+This is a dots online game. The game is created by using angular.js 1.x and firebase.
 
-This is written as example my best pratice of using angular 1.x for SPA.
-The application includes auth (sign-in, sign-up pages), list of all registered users, instant messager and obviously tic-tac-toe game.
+This is written as an example my best practice of using angular 1.x for SPA.
+The application includes auth (sign-in, sign-up pages), list of all registered users, instant messenger and obviously tic-tac-toe game.
 
 
 # How to play.
@@ -18,10 +18,10 @@ After clicking on that icon, another user see the notification and can confirm t
 
 So, seems that`s all. Have a nice playing :)
 
-# Here is the link to the builded application and hosted by firebase.
+# Here is the link where you can try this game.
 https://scorching-torch-5829.firebaseapp.com/
 
-# How to install it localy
+# How to install it locally
 
 I used npm, bower and gulp, so you should just run next commands in command line
 
